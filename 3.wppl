@@ -1,0 +1,15 @@
+// 3.1 
+
+var model = function() {
+
+  // Első húzás: király valószínűsége (4 király 52 lapból)
+  var h1 = flip(4/52);
+
+  // Második húzás: ha először királyt húztunk, akkor nem király valószínűsége, vagy ha először nem királyt húztunk, akkor király valószínűsége.
+  var h2 = h1 ? flip(48/51) : flip(4/51);
+
+  return {h2}
+}
+var dist = Enumerate(model);
+
+viz.auto(dist);
