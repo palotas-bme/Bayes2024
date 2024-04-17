@@ -96,3 +96,16 @@ var TwoDice = function () {
 }
 
 var output = Infer({ method: 'forward', samples: 10000, model: TwoDice });
+
+// 1.4
+var aceInHand = flip(0.5); 
+var kingInHandGivenAce = flip(0.5); 
+var kingInHandGivenNoAce = flip(0.5);
+var orMeanings = ['inclusive', 'exclusive', 'xor'];
+var orMeaning = uniformDraw(orMeanings);
+var kingInHand = (orMeaning === 'inclusive') ? (aceInHand && kingInHandGivenAce) || (!aceInHand && kingInHandGivenNoAce) :
+	(orMeaning === 'exclusive') ? (aceInHand || (!aceInHand && kingInHandGivenNoAce)) :
+		(aceInHand && kingInHandGivenAce) || ((!aceInHand) && kingInHandGivenNoAce);
+
+print('Ász a kezemben: ' + aceInHand);
+print('Király a kezemben: ' + kingInHand);
